@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+<Layout title="Contact">
+    <main>
+        <h1 class="text-gradient">Contact</h1>
+        <p>
+            Get in touch with me for collaborations, freelance opportunities, or just to say hi!
+        </p>
+        <section>
+            <Card
+                href="https://www.youtube.com/@af1ro493"
+                title="YouTube"
+                body="Check out my latest videos and tutorials on YouTube."
+            />
+            <Card
+                href="https://discord.gg/TKqGWueg"
+                title="Discord"
+                body="Join my Discord community to chat and collaborate."
+            />
+            <Card
+                href="https://github.com/AmarBego"
+                title="GitHub"
+                body="Explore my projects and contributions on GitHub."
+            />
+            <Card
+                href="mailto:begovicamar@proton.me"
+                title="Email"
+                body="Send me an email for any inquiries or opportunities."
+            />
+        </section>
+        </main>
+        
+        <style>
+            main {
+                margin: auto;
+                padding: 1rem;
+                width: 800px;
+                max-width: calc(100% - 2rem);
+                color: white;
+                font-size: 20px;
+                line-height: 1.6;
+            }
+            section {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+        </style>

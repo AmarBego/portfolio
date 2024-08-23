@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="Blog">
+    <main>
+        <h1 class="text-gradient">Blog</h1>
+        <p>
+            Welcome to my blog! Here you'll find articles, tutorials, and other resources on web development, design, and more. Check back often for updates, or <a href="/contact">get in touch</a> if you have any questions or suggestions.
+        </p>
+        <ul class="link-card-grid">
+            <Card
+                href="/blog/hello-world"
+                title="Hello, World!"
+                body="My first blog post, where I introduce myself and share my goals for this blog."
+            />
+            <p></p>
+            <Card
+                href="/blog/astro-tutorial"
+                title="Getting Started with Astro"
+                body="Learn how to build a simple website with Astro, the new static site generator for the modern web."
+            />
+            <p></p>
+            <Card
+                href="/blog/tailwind-tips"
+                title="10 Tips for Using Tailwind CSS"
+                body="Discover some of my favorite tips and tricks for getting the most out of Tailwind CSS in your projects."
+            />
+        </ul>
+    </main>
+
+<style>
+    main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+}
+</style>

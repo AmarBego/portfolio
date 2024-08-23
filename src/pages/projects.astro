@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+---
+
+<Layout title="projects"
+    <main>
+        <h1 class="text-gradient">Projects</h1>
+        <p>
+            Explore my portfolio of projects, showcasing my expertise in web design and software development.
+        </p>
+        <ul class="link-card-grid">
+            <Card
+                href="/projects/astro-tutorial"
+                title="Astro Tutorial"
+                body="Learn how to build a simple website with Astro, the new static site generator for the modern web."
+            />
+            <p></p>
+            <Card
+                href="/projects/tailwind-tips"
+                title="10 Tips for Using Tailwind CSS"
+                body="Discover some of my favorite tips and tricks for getting the most out of Tailwind CSS in your projects."
+            />
+            <p></p>
+            <Card
+                href="/projects/react-projects"
+                title="React Projects"
+                body="Check out my latest React projects, including web apps, games, and more."
+            />
+        </ul>
+    </main>
+
+<style>
+    main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+}
+</style>
