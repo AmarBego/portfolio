@@ -1,54 +1,48 @@
-# Astro Starter Kit: Basics
+# Amar Begovic - Web Developer Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+Welcome to my personal portfolio website repository! This site showcases my skills, projects, and provides ways to connect with me.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🚀 About Me
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I'm Amar Begovic, a passionate web developer specializing in creating stunning digital experiences. With expertise in modern web technologies, I craft fast, responsive websites and web applications that help businesses and individuals achieve their goals.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🛠 Technologies & Skills
 
-## 🚀 Project Structure
+- HTML, CSS, JavaScript
+- React
+- Astro
+- Node.js
+- TypeScript
+- Vue.js
+- And more!
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🌟 Projects
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Here are some of the projects featured on my portfolio:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+1. **React Dashboard**: A responsive admin dashboard with real-time data visualization.
+2. **Node.js API**: Scalable RESTful API built with Express and MongoDB.
+3. **Vue.js E-commerce**: Modern e-commerce platform with Vuex state management.
+4. **TypeScript Library**: Utility library for data manipulation and validation.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🔗 Connect with Me
 
-Any static assets, like images, can be placed in the `public/` directory.
+- [YouTube](https://www.youtube.com/@af1ro493): Check out my latest videos and tutorials
+- [Discord](https://discord.gg/TKqGWueg): Join my community and collaborate
+- [GitHub](https://github.com/AmarBego): Explore my projects and contributions
+- [Email](mailto:begovicamar@proton.me): Send me a message directly
 
-## 🧞 Commands
+## 🚀 Running the Project
 
-All commands are run from the root of the project, from a terminal:
+To run this project locally:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
+4. Open your browser and navigate to `http://localhost:4321`
 
-## 👀 Want to learn more?
+## 📄 License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This project is open source and available under the [MIT License](LICENSE).
+
+Feel free to explore the code, suggest improvements, or use it as inspiration for your own portfolio!
