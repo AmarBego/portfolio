@@ -70,12 +70,11 @@ const isIndexPage = Astro.url.pathname === '/';
         --font-size-xl: clamp(1.5rem, 3vw, 2rem);
         --font-size-xxl: clamp(2rem, 4vw, 3rem);
     }
-
     html, body {
         font-size: 16px;
-        height: 100%;
         margin: 0;
         padding: 0;
+        min-height: 100vh;
     }
 
     body {
@@ -89,14 +88,14 @@ const isIndexPage = Astro.url.pathname === '/';
     }
 
     .content-wrapper {
+        flex: 1;
+        width: 100%;
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        box-sizing: border-box;
     }
+
 
     .page-content {
         flex: 1;
