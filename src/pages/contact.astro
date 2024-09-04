@@ -1,52 +1,193 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import { Icon } from 'astro-icon/components';
 ---
-<Layout title="Contact">
-    <main>
-        <h1 class="text-gradient">Contact</h1>
-        <p>
-            Get in touch with me for collaborations, freelance opportunities, or just to say hi!
-        </p>
-        <section>
-            <Card
-                href="https://www.youtube.com/@af1ro493"
-                title="YouTube"
-                body="Check out my latest videos and tutorials on YouTube."
-            />
-            <Card
-                href="https://discord.gg/TKqGWueg"
-                title="Discord"
-                body="Join my Discord community to chat and collaborate."
-            />
-            <Card
-                href="https://github.com/AmarBego"
-                title="GitHub"
-                body="Explore my projects and contributions on GitHub."
-            />
-            <Card
-                href="mailto:begovicamar@proton.me"
-                title="Email"
-                body="Send me an email for any inquiries or opportunities."
-            />
-        </section>
-        </main>
+
+<Layout title="Contact | Amar Begovic">
+    <main class="contact-main">
+        <h1 class="glitch" data-text="Contact">Contact</h1>
+        <p class="intro">Connect with me through various platforms.</p>
         
-        <style>
-            main {
-                margin: auto;
-                padding: 1rem;
-                width: 800px;
-                max-width: calc(100% - 2rem);
-                color: white;
-                font-size: 20px;
-                line-height: 1.6;
-            }
-            section {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                gap: 1rem;
-                margin-top: 2rem;
-            }
-        </style>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <Icon name="mdi:youtube" class="contact-icon" />
+                <h2>YouTube</h2>
+                <p>Check out my latest videos and tutorials</p>
+                <a href="https://www.youtube.com/@af1ro493" class="contact-link">Visit Channel</a>
+            </div>
+            <div class="contact-card">
+                <Icon name="mdi:discord" class="contact-icon" />
+                <h2>Discord</h2>
+                <p>Join my community and collaborate</p>
+                <a href="https://discord.gg/TKqGWueg" class="contact-link">Join Server</a>
+            </div>
+            <div class="contact-card">
+                <Icon name="mdi:github" class="contact-icon" />
+                <h2>GitHub</h2>
+                <p>Explore my projects and contributions</p>
+                <a href="https://github.com/AmarBego" class="contact-link">View Profile</a>
+            </div>
+            <div class="contact-card">
+                <Icon name="mdi:email" class="contact-icon" />
+                <h2>Email</h2>
+                <p>Send a message directly to me</p>
+                <a href="mailto:begovicamar@proton.me" class="contact-link">Send Email</a>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .contact-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        background: var(--background);
+    }
+
+    .glitch {
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                    -0.025em -0.05em 0 rgba(0,255,0,0.75),
+                    0.025em 0.05em 0 rgba(0,0,255,0.75);
+        animation: glitch 500ms infinite;
+    }
+
+    .glitch span {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .glitch span:first-child {
+        animation: glitch 650ms infinite;
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        transform: translate(-0.025em, -0.0125em);
+        opacity: 0.8;
+    }
+
+    .glitch span:last-child {
+        animation: glitch 375ms infinite;
+        clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+        transform: translate(0.0125em, 0.025em);
+        opacity: 0.8;
+    }
+
+    @keyframes glitch {
+        0% {
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                        -0.05em -0.025em 0 rgba(0,255,0,0.75),
+                        -0.025em 0.05em 0 rgba(0,0,255,0.75);
+        }
+        14% {
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                        -0.05em -0.025em 0 rgba(0,255,0,0.75),
+                        -0.025em 0.05em 0 rgba(0,0,255,0.75);
+        }
+        15% {
+            text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75),
+                        0.025em 0.025em 0 rgba(0,255,0,0.75),
+                        -0.05em -0.05em 0 rgba(0,0,255,0.75);
+        }
+        49% {
+            text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75),
+                        0.025em 0.025em 0 rgba(0,255,0,0.75),
+                        -0.05em -0.05em 0 rgba(0,0,255,0.75);
+        }
+        50% {
+            text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75),
+                        0.05em 0 0 rgba(0,255,0,0.75),
+                        0 -0.05em 0 rgba(0,0,255,0.75);
+        }
+        99% {
+            text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75),
+                        0.05em 0 0 rgba(0,255,0,0.75),
+                        0 -0.05em 0 rgba(0,0,255,0.75);
+        }
+        100% {
+            text-shadow: -0.025em 0 0 rgba(255,0,0,0.75),
+                        -0.025em -0.025em 0 rgba(0,255,0,0.75),
+                        -0.025em -0.05em 0 rgba(0,0,255,0.75);
+        }
+    }
+
+    .intro {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        color: var(--paragraph);
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .contact-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        color: var(--paragraph);
+        height: 80%;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+        color: var(--highlight);
+    }
+
+    .contact-card h2 {
+        font-size: 1.5rem;
+        color: var(--heading);
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-card p {
+        font-size: 1rem;
+        color: var(--paragraph);
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-link {
+        background: var(--button);
+        color: var(--button-text);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+
+    .contact-link:hover {
+        background: var(--highlight);
+    }
+
+    @media (max-width: 768px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

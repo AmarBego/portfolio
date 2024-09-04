@@ -1,43 +1,209 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
-<Layout title="projects"
-    <main>
-        <h1 class="text-gradient">Projects</h1>
-        <p>
-            Explore my portfolio of projects, showcasing my expertise in web design and software development.
-        </p>
-        <ul class="link-card-grid">
-            <Card
-                href="/projects/astro-tutorial"
-                title="Astro Tutorial"
-                body="Learn how to build a simple website with Astro, the new static site generator for the modern web."
-            />
-            <p></p>
-            <Card
-                href="/projects/tailwind-tips"
-                title="10 Tips for Using Tailwind CSS"
-                body="Discover some of my favorite tips and tricks for getting the most out of Tailwind CSS in your projects."
-            />
-            <p></p>
-            <Card
-                href="/projects/react-projects"
-                title="React Projects"
-                body="Check out my latest React projects, including web apps, games, and more."
-            />
-        </ul>
+<Layout title="Projects | Amar Begovic">
+    <main class="projects-main">
+        <h1 class="glitch" data-text="Projects">Projects</h1>
+        <p class="intro">Innovative solutions crafted with passion and expertise.</p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-card-content">
+                    <Icon name="mdi:react" class="project-icon" />
+                    <h2>React Dashboard</h2>
+                    <p>A responsive admin dashboard with real-time data visualization.</p>
+                </div>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+            <div class="project-card">
+                <div class="project-card-content">
+                    <Icon name="mdi:nodejs" class="project-icon" />
+                    <h2>Node.js API</h2>
+                    <p>Scalable RESTful API built with Express and MongoDB.</p>
+                </div>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+            <div class="project-card">
+                <div class="project-card-content">
+                    <Icon name="mdi:vuejs" class="project-icon" />
+                    <h2>Vue.js E-commerce</h2>
+                    <p>Modern e-commerce platform with Vuex state management.</p>
+                </div>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+            <div class="project-card">
+                <div class="project-card-content">
+                    <Icon name="mdi:language-typescript" class="project-icon" />
+                    <h2>TypeScript Library</h2>
+                    <p>Utility library for data manipulation and validation.</p>
+                </div>
+                <a href="#" class="project-link">View Project</a>
+            </div>
+        </div>
     </main>
+</Layout>
 
 <style>
-    main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-}
+    .projects-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        background: var(--background);
+    }
+
+    .glitch {
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                    -0.025em -0.05em 0 rgba(0,255,0,0.75),
+                    0.025em 0.05em 0 rgba(0,0,255,0.75);
+        animation: glitch 500ms infinite;
+    }
+
+    .glitch span {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .glitch span:first-child {
+        animation: glitch 650ms infinite;
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        transform: translate(-0.025em, -0.0125em);
+        opacity: 0.8;
+    }
+
+    .glitch span:last-child {
+        animation: glitch 375ms infinite;
+        clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+        transform: translate(0.0125em, 0.025em);
+        opacity: 0.8;
+    }
+
+    @keyframes glitch {
+        0% {
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                        -0.05em -0.025em 0 rgba(0,255,0,0.75),
+                        -0.025em 0.05em 0 rgba(0,0,255,0.75);
+        }
+        14% {
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75),
+                        -0.05em -0.025em 0 rgba(0,255,0,0.75),
+                        -0.025em 0.05em 0 rgba(0,0,255,0.75);
+        }
+        15% {
+            text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75),
+                        0.025em 0.025em 0 rgba(0,255,0,0.75),
+                        -0.05em -0.05em 0 rgba(0,0,255,0.75);
+        }
+        49% {
+            text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75),
+                        0.025em 0.025em 0 rgba(0,255,0,0.75),
+                        -0.05em -0.05em 0 rgba(0,0,255,0.75);
+        }
+        50% {
+            text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75),
+                        0.05em 0 0 rgba(0,255,0,0.75),
+                        0 -0.05em 0 rgba(0,0,255,0.75);
+        }
+        99% {
+            text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75),
+                        0.05em 0 0 rgba(0,255,0,0.75),
+                        0 -0.05em 0 rgba(0,0,255,0.75);
+        }
+        100% {
+            text-shadow: -0.025em 0 0 rgba(255,0,0,0.75),
+                        -0.025em -0.025em 0 rgba(0,255,0,0.75),
+                        -0.025em -0.05em 0 rgba(0,0,255,0.75);
+        }
+    }
+
+    .intro {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        color: var(--paragraph);
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .project-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 80%;
+    }
+
+    .project-card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+        color: var(--highlight);
+    }
+
+
+    .project-card h2 {
+        font-size: 1.5rem;
+        color: var(--heading);
+        margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+        font-size: 1rem;
+        color: var(--paragraph);
+        margin-bottom: 1.5rem;
+    }
+
+    .project-link {
+        background: var(--button);
+        color: var(--button-text);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+
+    .project-link:hover {
+        background: var(--highlight);
+    }
+
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>

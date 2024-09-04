@@ -1,11 +1,12 @@
 ---
+import '../styles/global.css';
+
 interface Props {
     title: string;
 }
 
 const { title } = Astro.props;
-const currentPath = Astro.url.pathname;
-const isHomePage = currentPath === '/';
+const isIndexPage = Astro.url.pathname === '/';
 ---
 
 <!doctype html>
@@ -19,74 +20,234 @@ const isHomePage = currentPath === '/';
         <title>{title}</title>
     </head>
     <body>
-        <slot />
-        {isHomePage ? null : (
-            <div class="floating-button" onclick="window.location.href='/'">
-                &larr;
-            </div>
+        {!isIndexPage && (
+            <header id="smart-header">
+                <nav>
+                    <a href="/" class="logo">AB</a>
+                    <div class="nav-links">
+                        <a href="/">Home</a>
+                        <a href="/projects">Projects</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/contact">Contact</a>
+                    </div>
+                    <button class="hamburger" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </nav>
+            </header>
         )}
+        <slot />
+        <script>
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+        
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                });
+            }
+        </script>
     </body>
 </html>
+
 <style is:global>
     :root {
-        --accent: 136, 58, 234;
-        --accent-light: 224, 204, 250;
-        --accent-dark: 49, 10, 101;
-        --accent-gradient: linear-gradient(
-            45deg,
-            rgb(var(--accent)),
-            rgb(var(--accent-light)) 30%,
-            white 60%
-        );
+        --background: #0f0e17;
+        --headline: #fffffe;
+        --paragraph: #a7a9be;
+        --button: #ff8906;
+        --button-text: #fffffe;
+        --stroke: #2e2f3e;
+        --main: #fffffe;
+        --highlight: #ff8906;
+        --secondary: #f25f4c;
+        --tertiary: #e53170;
+        --font-size-base: clamp(1rem, 2vw, 1.2rem);
+        --font-size-lg: clamp(1.25rem, 2.5vw, 1.5rem);
+        --font-size-xl: clamp(1.5rem, 3vw, 2rem);
+        --font-size-xxl: clamp(2rem, 4vw, 3rem);
     }
-    html {
-        font-family: system-ui, sans-serif;
-        background: #13151a;
+
+    html, body {
+        font-size: 16px;
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
-    code {
-        font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
-            monospace;
-    }
-    header {
-        padding: 1rem;
-        text-align: center;
-    }
-    nav {
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--background);
+        color: var(--paragraph);
+        line-height: 1.6;
+        font-size: var(--font-size-base);
         display: flex;
+        flex-direction: column;
+    }
+
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
     }
 
-	.floating-button {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 5rem;
-    height: 5rem;
-    background-color: #23262d;
-	color: white;
-    background-size: 200% 200%;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
+    .page-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-.floating-button:is(:hover, :focus-within) {
-    background-position: 100% 100%;
-	color: black;
-	background-image: var(--accent-gradient);
-}
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--headline);
+        font-weight: 700;
+    }
 
+    h1 { font-size: var(--font-size-xxl); }
+    h2 { font-size: var(--font-size-xl); }
+    h3 { font-size: var(--font-size-lg); }
 
+    a {
+        color: var(--button);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: var(--highlight);
+    }
+    #smart-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(15, 14, 23, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+    }
+
+    #smart-header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    #smart-header .logo {
+        font-size: var(--font-size-lg);
+        font-weight: bold;
+        color: var(--headline);
+        text-decoration: none;
+    }
+
+    #smart-header .nav-links {
+        display: flex;
+    }
+
+    #smart-header .nav-links a {
+        color: var(--paragraph);
+        text-decoration: none;
+        margin-left: 1.5rem;
+        transition: color 0.3s ease;
+        font-size: var(--font-size-base);
+    }
+
+    #smart-header .nav-links a:hover {
+        color: var(--button);
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 2rem;
+        height: 2rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+        width: 2rem;
+        height: 0.25rem;
+        background: var(--paragraph);
+        border-radius: 10px;
+        transition: all 0.3s linear;
+        position: relative;
+        transform-origin: 1px;
+    }
+
+    .hamburger:hover span {
+        background: var(--button);
+    }
+
+    .hamburger.active span {
+        background: var(--highlight);
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    @media (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+
+        #smart-header .nav-links {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 80vw;
+            max-width: 300px;
+            flex-direction: column;
+            background: var(--background);
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #smart-header .nav-links.active {
+            transform: translateX(0);
+        }
+
+        #smart-header .nav-links a {
+            margin: 1rem 0;
+            font-size: var(--font-size-lg);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+    }
 </style>

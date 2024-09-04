@@ -1,0 +1,15 @@
+:root {
+    --button-rgb: 255, 137, 6;
+    --font-size-base: clamp(1rem, 2vw, 1.2rem);
+    --font-size-lg: clamp(1.25rem, 2.5vw, 1.5rem);
+    --font-size-xl: clamp(1.5rem, 3vw, 2rem);
+    --font-size-xxl: clamp(2rem, 4vw, 3rem);
+}
+
+body {
+    font-size: var(--font-size-base);
+}
+
+h1 { font-size: var(--font-size-xxl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }

@@ -1,43 +1,68 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
 ---
 
 <Layout title="Blog">
-    <main>
-        <h1 class="text-gradient">Blog</h1>
-        <p>
+    <main class="blog-main">
+        <h1 class="blog-title">Blog</h1>
+        <p class="blog-intro">
             Welcome to my blog! Here you'll find articles, tutorials, and other resources on web development, design, and more. Check back often for updates, or <a href="/contact">get in touch</a> if you have any questions or suggestions.
         </p>
-        <ul class="link-card-grid">
-            <Card
-                href="/blog/hello-world"
-                title="Hello, World!"
-                body="My first blog post, where I introduce myself and share my goals for this blog."
-            />
-            <p></p>
-            <Card
-                href="/blog/astro-tutorial"
-                title="Getting Started with Astro"
-                body="Learn how to build a simple website with Astro, the new static site generator for the modern web."
-            />
-            <p></p>
-            <Card
-                href="/blog/tailwind-tips"
-                title="10 Tips for Using Tailwind CSS"
-                body="Discover some of my favorite tips and tricks for getting the most out of Tailwind CSS in your projects."
-            />
-        </ul>
+        <div class="blog-grid">
+            {blogPosts.map((post: CollectionEntry<'blog'>) => (
+                <a href={`/blog/${post.slug}`} class="blog-card">
+                    <h2>{post.data.title}</h2>
+                    <p>{post.data.description}</p>
+                    <span class="read-more">Read more →</span>
+                </a>
+            ))}
+        </div>
     </main>
+</Layout>
 
 <style>
-    main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-}
+    .blog-main {
+        margin: auto;
+        padding: 2rem;
+        max-width: 1200px;
+        color: white;
+    }
+    .blog-title {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .blog-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    .blog-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: transform 0.3s ease;
+        text-decoration: none;
+        color: white;
+    }
+    .blog-card:hover {
+        transform: translateY(-5px);
+    }
+    .blog-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .read-more {
+        display: inline-block;
+        margin-top: 1rem;
+        font-weight: bold;
+    }
 </style>
