@@ -1,58 +1,249 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import UserCard from '../components/UserCard.astro';
+import { Icon } from 'astro-icon/components';
 import TransactionModal from '../components/TransactionModal.astro';
-import '../styles/users.css';
+
+interface User {
+  _id: string;
+  email: string;
+  selectedTheme: string;
+  __v: number;
+  name: string;
+  role?: string;
+  lastActive?: Date;
+  dateJoined?: Date;
+}
 
 const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/users`);
-const users = await response.json();
+const users: User[] = await response.json();
 ---
 
 <Layout title="Users | Amar Begovic">
     <main class="users-main">
         <h1 class="glitch" data-text="Users">Users</h1>
-        <p class="intro">View users and their transactions.</p>
         
-        <div class="users-grid">
-            {users.map((user) => (
-                <UserCard user={user} />
-            ))}
+        <div class="controls">
+            <div class="search-container">
+                <Icon name="mdi:magnify" />
+                <input type="text" id="search" placeholder="Search users..." />
+            </div>
+            <select id="filter-role">
+                <option value="">All Roles</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+            <select id="filter-status">
+                <option value="">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
         </div>
 
+        <div class="table-container">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th data-sort="name">Name <Icon name="mdi:sort" /></th>
+                        <th data-sort="email">Email <Icon name="mdi:sort" /></th>
+                        <th data-sort="role">Role <Icon name="mdi:sort" /></th>
+                        <th data-sort="lastActive">Last Active <Icon name="mdi:sort" /></th>
+                        <th data-sort="dateJoined">Date Joined <Icon name="mdi:sort" /></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="users-body">
+                    {users.map((user: User) => (
+                        <tr data-user-id={user._id}>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>
+                                <span class={`role-badge ${user.role || 'user'}`}>
+                                    {user.role || 'User'}
+                                </span>
+                            </td>
+                            <td>{user.lastActive ? new Date(user.lastActive).toLocaleDateString() : 'N/A'}</td>
+                            <td>{user.dateJoined ? new Date(user.dateJoined).toLocaleDateString() : 'N/A'}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="view-expenses" title="View Expenses">
+                                        <Icon name="mdi:cash" />
+                                    </button>
+                                    <button class="view-due-transactions" title="Due Transactions">
+                                        <Icon name="mdi:calendar-clock" />
+                                    </button>
+                                    <button class="edit-user" title="Edit User">
+                                        <Icon name="mdi:pencil" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button id="prev-page" disabled><Icon name="mdi:chevron-left" /> Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" disabled>Next <Icon name="mdi:chevron-right" /></button>
+        </div>
         <TransactionModal />
     </main>
 </Layout>
 
-<script src="../scripts/userTransactions.js"></script>
+<script>
+    import { setupEventListeners } from '../scripts/userManagement';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setupEventListeners();
+    });
+</script>
 
 <style>
     .users-main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 4rem 2rem;
-        background: var(--background);
-        min-height: 100vh;
+        padding: 2rem;
+        margin: 0 auto;
     }
 
-    .intro {
-        font-size: 1.2rem;
-        margin-bottom: 3rem;
-        text-align: center;
+    .controls {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        align-items: center;
+    }
+
+    .search-container {
+        position: relative;
+        flex-grow: 1;
+    }
+
+    .search-container input {
+        width: 100%;
+        padding: 0.5rem 0.5rem 0.5rem 2rem;
+        border-radius: 20px;
+        border: 1px solid var(--stroke);
+        background-color: var(--background);
         color: var(--paragraph);
     }
 
-    .users-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        width: 100%;
-        max-width: 1200px;
+    .search-container :global(svg) {
+        position: absolute;
+        left: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--paragraph);
     }
 
-    @media (max-width: 768px) {
-        .users-grid {
-            grid-template-columns: 1fr;
-        }
+    select {
+        padding: 0.5rem;
+        border-radius: 20px;
+        border: 1px solid var(--stroke);
+        background-color: var(--background);
+        color: var(--paragraph);
+    }
+
+    .table-container {
+        overflow-x: auto;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 1rem;
+    }
+
+    .users-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .users-table th, .users-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--stroke);
+    }
+
+    .users-table th {
+        cursor: pointer;
+        font-weight: bold;
+        color: var(--heading);
+    }
+
+    .users-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .role-badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .role-badge.admin {
+        background-color: #ff9800;
+        color: #000;
+    }
+
+    .role-badge.user {
+        background-color: #4caf50;
+        color: #fff;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .action-buttons button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 50%;
+        transition: background-color 0.3s;
+    }
+
+    .action-buttons button:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .action-buttons :global(svg) {
+        width: 20px;
+        height: 20px;
+        color: var(--paragraph);
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .pagination button {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        background-color: var(--button);
+        color: var(--button-text);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .pagination button:hover:not(:disabled) {
+        background-color: var(--highlight);
+    }
+
+    .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .pagination span {
+        margin: 0 1rem;
+        color: var(--paragraph);
     }
 </style>
