@@ -4,17 +4,7 @@ const usersPerPage = 10;
 
 export function filterUsers(searchTerm) {
     return users.filter(user => {
-        const matchesSearch = user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                              user.email.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchesSearch;
-    });
-}
-
-export function sortUsers(field, direction) {
-    return users.sort((a, b) => {
-        if (a[field] < b[field]) return direction === 'asc' ? -1 : 1;
-        if (a[field] > b[field]) return direction === 'asc' ? 1 : -1;
-        return 0;
+        return user.username.toLowerCase().includes(searchTerm.toLowerCase());
     });
 }
 
@@ -73,38 +63,46 @@ function showModal(title, transactions, isDueTransactions = false) {
     modal.style.display = 'block';
 }
 
+function updatePagination(totalUsers) {
+    const totalPages = Math.ceil(totalUsers / usersPerPage);
+    const pageInfo = document.getElementById('page-info');
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages || totalUsers === 0;
+}
+
+function handleFilters() {
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    const rows = document.querySelectorAll('#users-body tr');
+    
+    rows.forEach(row => {
+        const username = row.querySelector('td:first-child').textContent.toLowerCase();
+        const matchesSearch = searchTerm.split('').every((char, index) => username[index] === char);
+        row.style.display = matchesSearch ? '' : 'none';
+    });
+
+    updatePagination(document.querySelectorAll('#users-body tr:not([style*="display: none"])').length);
+}
+
 export function setupEventListeners() {
     const searchInput = document.getElementById('search');
-    const roleSelect = document.getElementById('filter-role');
-    const statusSelect = document.getElementById('filter-status');
-    const tableHeaders = document.querySelectorAll('.users-table th[data-sort]');
     const prevButton = document.getElementById('prev-page');
     const nextButton = document.getElementById('next-page');
     const userTable = document.querySelector('.users-table');
     const modal = document.getElementById('transactions-modal');
     const closeModal = document.getElementById('close-modal');
 
-    // Fetch users data
     fetch(`${import.meta.env.PUBLIC_API_URL}/api/users`)
         .then(response => response.json())
         .then(data => {
             users = data;
+            updatePagination(users.length);
         });
 
     searchInput.addEventListener('input', handleFilters);
-
-    tableHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const field = header.getAttribute('data-sort');
-            const currentDirection = header.getAttribute('data-direction') || 'asc';
-            const newDirection = currentDirection === 'asc' ? 'desc' : 'asc';
-            
-            tableHeaders.forEach(h => h.removeAttribute('data-direction'));
-            header.setAttribute('data-direction', newDirection);
-
-            const sortedUsers = sortUsers(field, newDirection);
-        });
-    });
 
     if (prevButton) {
         prevButton.addEventListener('click', () => {
@@ -117,7 +115,8 @@ export function setupEventListeners() {
 
     if (nextButton) {
         nextButton.addEventListener('click', () => {
-            const totalPages = Math.ceil(users.length / usersPerPage);
+            const visibleUsers = document.querySelectorAll('#users-body tr:not([style*="display: none"])').length;
+            const totalPages = Math.ceil(visibleUsers / usersPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
                 handleFilters();
@@ -156,9 +155,4 @@ export function setupEventListeners() {
             modal.style.display = 'none';
         }
     });
-}
-
-function handleFilters() {
-    const searchTerm = document.getElementById('search').value;
-    const filteredUsers = filterUsers(searchTerm);
 }

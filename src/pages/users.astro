@@ -35,9 +35,9 @@ const users: User[] = await response.json();
             <table class="users-table">
                 <thead>
                     <tr>
-                        <th data-sort="username">Name <Icon name="mdi:sort" /></th>
-                        <th data-sort="lastActive">Last Active <Icon name="mdi:sort" /></th>
-                        <th data-sort="dateJoined">Date Joined <Icon name="mdi:sort" /></th>
+                        <th>Name</th>
+                        <th>Last Active</th>
+                        <th>Date Joined</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -133,6 +133,7 @@ select {
         width: 100%;
         border-collapse: separate;
         border-spacing: 0;
+        text-align: center;
     }
 
     .users-table th, .users-table td {
@@ -141,39 +142,38 @@ select {
         border-bottom: 1px solid var(--stroke);
     }
 
-    .users-table th {
-        cursor: pointer;
-        font-weight: bold;
-        color: var(--heading);
-    }
-
     .users-table tr:last-child td {
         border-bottom: none;
     }
 
     .action-buttons {
-        display: flex;
-        gap: 0.5rem;
-    }
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
 
-    .action-buttons button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.25rem;
-        border-radius: 50%;
-        transition: background-color 0.3s;
-    }
+.action-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .action-buttons button:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
+.action-buttons button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-    .action-buttons :global(svg) {
-        width: 20px;
-        height: 20px;
-        color: var(--paragraph);
-    }
+.action-buttons :global(svg) {
+    width: 20px;
+    height: 20px;
+    color: var(--paragraph);
+    fill: currentColor;
+}
 
     .pagination {
         display: flex;
