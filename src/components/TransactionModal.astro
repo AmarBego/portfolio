@@ -1,0 +1,77 @@
+<div id="transactions-modal" class="modal">
+    <div class="modal-content">
+        <h2 id="modal-title"></h2>
+        <div id="transactions-list"></div>
+        <button id="close-modal">Close</button>
+    </div>
+</div>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow: auto;
+    }
+
+    .modal-content {
+        background-color: var(--background);
+        margin: 5vh auto;
+        padding: 2rem;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 600px;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #modal-title {
+        margin-top: 0;
+        color: var(--heading);
+    }
+
+    #transactions-list {
+        flex-grow: 1;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+    }
+
+    .transaction {
+        background: var(--stroke);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .transaction p {
+        margin: 0.5rem 0;
+        color: var(--paragraph);
+    }
+
+    #close-modal {
+        background: var(--button);
+        color: var(--button-text);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        align-self: flex-end;
+    }
+
+    #close-modal:hover {
+        background: var(--highlight);
+    }
+
+    .transaction-divider {
+        border: 0;
+        height: 1px;
+        background: var(--stroke);
+        margin: 1rem 0;
+    }
+</style>

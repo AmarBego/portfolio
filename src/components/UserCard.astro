@@ -1,0 +1,122 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    user: {
+        _id: string;
+        name: string;
+        email: string;
+    };
+}
+
+const { user } = Astro.props;
+---
+
+<div class="user-card" data-user-id={user._id}>
+    <div class="user-card-content">
+        <Icon name="mdi:account" class="user-icon" />
+        <h2>{user.name}</h2>
+        <p>{user.email.split('@')[0]}</p>
+    </div>
+    <div class="user-buttons">
+        <div class="button-container">
+            <button class="view-expenses" disabled>View Expenses</button>
+            <span class="popup-message expenses-message"></span>
+        </div>
+        <div class="button-container">
+            <button class="view-due-transactions" disabled>Due Transactions</button>
+            <span class="popup-message due-transactions-message"></span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .user-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .user-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-card-content {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .user-icon {
+        width: 60px;
+        height: 60px;
+        color: var(--highlight);
+        margin-bottom: 0.5rem;
+    }
+
+    .user-card h2 {
+        font-size: 1.5rem;
+        color: var(--heading);
+        margin-bottom: 0.5rem;
+    }
+
+    .user-card p {
+        color: var(--paragraph);
+    }
+
+    .user-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .view-expenses,
+    .view-due-transactions {
+        background: var(--button);
+        color: var(--button-text);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .view-expenses:hover,
+    .view-due-transactions:hover {
+        background: var(--highlight);
+    }
+
+    .button-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .popup-message {
+        display: none;
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--stroke);
+        color: var(--paragraph);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .view-expenses:disabled,
+    .view-due-transactions:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .view-expenses:disabled:hover,
+    .view-due-transactions:disabled:hover {
+        background: var(--button);
+    }
+</style>
