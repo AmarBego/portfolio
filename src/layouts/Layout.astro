@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import { getLanguage } from '../utils/translation.js';
 
 interface Props {
     title: string;
@@ -8,10 +9,11 @@ interface Props {
 
 const { title } = Astro.props;
 const isIndexPage = Astro.url.pathname === '/';
+const initialLang = getLanguage();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={initialLang}>
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content="Astro description" />
@@ -19,11 +21,29 @@ const isIndexPage = Astro.url.pathname === '/';
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
+        <style>
+            body {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+        </style>
     </head>
     <body>
         {!isIndexPage && (
             <Header />
         )}
         <slot />
+        <script>
+            import { setupClientTranslation } from '../utils/translation.js';
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                setupClientTranslation();
+                
+                // Reveal body after a short delay
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 50);
+            });
+        </script>
     </body>
 </html>

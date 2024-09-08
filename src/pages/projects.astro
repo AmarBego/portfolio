@@ -1,49 +1,60 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Icon } from 'astro-icon/components';
+import Card from '../components/Card.astro';
 import '../styles/global.css';
 import '../styles/card.css';
 import '../styles/glitch.css';
+import { translate, getLanguage } from '../utils/translation.js';
+
+const currentLang = getLanguage();
 ---
 
-<Layout title="Projects | Amar Begovic">
+<Layout title={`${translate('projects', currentLang)} | Amar Begovic`}>
     <main class="main">
-        <h1 class="glitch" data-text="Projects">Projects</h1>
-        <p class="intro">Innovative solutions crafted with passion and expertise.</p>
+        <h1 class="glitch" data-text={translate('projects', currentLang)} data-i18n="projects">
+            {translate('projects', currentLang)}
+        </h1>
+        <p class="intro" data-i18n="projectsIntro">{translate('projectsIntro', currentLang)}</p>
         
         <div class="card-grid">
-            <div class="card">
-                <div class="card-content">
-                    <Icon name="mdi:react" class="card-icon" />
-                    <h2>React Dashboard</h2>
-                    <p>A responsive admin dashboard with real-time data visualization.</p>
-                </div>
-                <a href="#" class="card-link">View Project</a>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <Icon name="mdi:nodejs" class="card-icon" />
-                    <h2>Node.js API</h2>
-                    <p>Scalable RESTful API built with Express and MongoDB.</p>
-                </div>
-                <a href="#" class="card-link">View Project</a>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <Icon name="mdi:vuejs" class="card-icon" />
-                    <h2>Vue.js E-commerce</h2>
-                    <p>Modern e-commerce platform with Vuex state management.</p>
-                </div>
-                <a href="#" class="card-link">View Project</a>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <Icon name="mdi:language-typescript" class="card-icon" />
-                    <h2>TypeScript Library</h2>
-                    <p>Utility library for data manipulation and validation.</p>
-                </div>
-                <a href="#" class="card-link">View Project</a>
-            </div>
+            <Card 
+                href="https://dashboard-nhm2.onrender.com/" 
+                target="_blank"
+                titleKey="reactFinanceDashboard"
+                bodyKey="reactFinanceDashboardDesc"
+                icon="mdi:react"
+            >
+                <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
+            </Card>
+            <Card 
+                href="/users" 
+                titleKey="nodeJsAPI"
+                bodyKey="nodeJsAPIDesc"
+                icon="mdi:nodejs"
+            >
+                <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
+            </Card>
+            <Card 
+                href="#" 
+                titleKey="vueJsEcommerce"
+                bodyKey="vueJsEcommerceDesc"
+                icon="mdi:vuejs"
+            >
+                <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
+            </Card>
+            <Card 
+                href="#" 
+                titleKey="typescriptLibrary"
+                bodyKey="typescriptLibraryDesc"
+                icon="mdi:language-typescript"
+            >
+                <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
+            </Card>
         </div>
     </main>
 </Layout>
+
+<script>
+    import { setupClientTranslation } from '../utils/translation.js';
+    setupClientTranslation();
+</script>

@@ -1,15 +1,19 @@
 ---
-const isIndexPage = Astro.url.pathname === '/';
+import { translate, getLanguage } from '../utils/translation.js';
+const currentLang = getLanguage();
 ---
 
 <header id="smart-header">
     <nav>
         <a href="/" class="logo">AB</a>
         <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/contact">Contact</a>
-            <a href="/users">Users</a>
+            <a href="/" data-i18n="home">{translate('home', currentLang)}</a>
+            <a href="/projects" data-i18n="projects">{translate('projects', currentLang)}</a>
+            <a href="/contact" data-i18n="contact">{translate('contact', currentLang)}</a>
+        </div>
+        <div class="language-switcher">
+            <button id="lang-en" class="lang-btn">EN</button>
+            <button id="lang-de" class="lang-btn">DE</button>
         </div>
         <button class="hamburger" aria-label="Toggle menu">
             <span></span>
@@ -157,3 +161,34 @@ const isIndexPage = Astro.url.pathname === '/';
         transform: rotate(-45deg);
     }
 }
+.language-switcher {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--paragraph);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    padding: 0.25rem 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.lang-btn.active {
+    color: var(--button);
+    font-weight: bold;
+}
+
+.lang-btn:hover {
+    color: var(--highlight);
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        margin-top: 1rem;
+    }
+}
+</style>

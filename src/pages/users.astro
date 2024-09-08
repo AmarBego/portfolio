@@ -4,6 +4,8 @@ import { Icon } from 'astro-icon/components';
 import TransactionModal from '../components/TransactionModal.astro';
 import '../styles/global.css';
 import '../styles/glitch.css';
+import { formatDate } from '../utils/dateUtils';
+import { translate, getLanguage } from '../utils/translation';
 
 interface User {
   _id: string;
@@ -12,9 +14,11 @@ interface User {
   __v: number;
   username: string;
   role?: string;
-  lastActive?: Date;
-  dateJoined?: Date;
+  lastActive?: string | Date;
+  dateJoined?: string | Date;
 }
+
+const currentLang = getLanguage();
 
 const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/users`);
 const users: User[] = await response.json();
@@ -23,6 +27,15 @@ const users: User[] = await response.json();
 <Layout title="Users | Amar Begovic">
     <main class="main">
         <h1 class="glitch" data-text="Users">Users</h1>
+
+        <p class="explanation">
+            This page demonstrates the power of my real-time API, which is seamlessly connected to the back-end of my 
+            <a href="https://dashboard-nhm2.onrender.com/" target="_blank" rel="noopener noreferrer">Finance React Dashboard</a>. 
+            The user data you see here updates in real-time, reflecting the latest information from my finance tracking system on a 
+            completely separate site. This integration showcases my ability to connect multiple systems, allowing data from one 
+            project to be dynamically displayed on another. It's a live example of how my front-end portfolio and back-end API 
+            work together to provide an up-to-date, dynamic user experience across different platforms.
+        </p>
 
         <div class="controls">
             <div class="search-container">
@@ -45,8 +58,8 @@ const users: User[] = await response.json();
                     {users.map((user: User) => (
                         <tr data-user-id={user._id}>
                             <td>{user.username}</td>
-                            <td>{user.lastActive ? new Date(user.lastActive).toLocaleDateString() : 'N/A'}</td>
-                            <td>{user.dateJoined ? new Date(user.dateJoined).toLocaleDateString() : 'N/A'}</td>
+                            <td>{formatDate(user.lastActive)}</td>
+                            <td>{formatDate(user.dateJoined)}</td>
                             <td>
                                 <div class="action-buttons">
                                     <button class="view-expenses" title="View Expenses">
@@ -74,6 +87,7 @@ const users: User[] = await response.json();
 
 <script>
     import { setupEventListeners } from '../scripts/userManagement';
+    import '../scripts/websocket';
 
     document.addEventListener('DOMContentLoaded', () => {
         setupEventListeners();
@@ -208,4 +222,23 @@ select {
         margin: 0 1rem;
         color: var(--paragraph);
     }
+
+    .explanation {
+        max-width: 800px;
+        margin: 1rem auto 2rem;
+        text-align: center;
+        color: var(--paragraph);
+        line-height: 1.6;
+    }
+
+    .explanation a {
+        color: var(--highlight);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .explanation a:hover {
+        color: var(--button);
+    }
+
 </style>

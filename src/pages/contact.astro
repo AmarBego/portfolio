@@ -4,38 +4,54 @@ import { Icon } from 'astro-icon/components';
 import '../styles/card.css';
 import '../styles/global.css';
 import '../styles/glitch.css';
+import { translate, getLanguage } from '../utils/translation.js';
+
+const currentLang = getLanguage();
 ---
 
-<Layout title="Contact | Amar Begovic">
+<Layout title={`${translate('contact', currentLang)} | Amar Begovic`}>
     <main class="main">
-        <h1 class="glitch" data-text="Contact">Contact</h1>
-        <p class="intro">Connect with me through various platforms.</p>
+        <h1 class="glitch" data-text={translate('contact', currentLang)} data-i18n="contact">
+            {translate('contact', currentLang)}
+        </h1>
+        <p class="intro" data-i18n="connectPlatforms">{translate('connectPlatforms', currentLang)}</p>
         
         <div class="card-grid">
             <div class="card">
                 <div class="card-content">
                     <Icon name="mdi:discord" class="card-icon" />
                     <h2>Discord</h2>
-                    <p>Add me as a friend on Discord</p>
-                    <a href="https://discord.gg/TKqGWueg" class="card-link">Add Friend</a>
+                    <p data-i18n="discordFriend">{translate('discordFriend', currentLang)}</p>
+                    <a href="https://discord.gg/TKqGWueg" class="card-link" data-i18n="addFriend" target="_blank">
+                        {translate('addFriend', currentLang)}
+                    </a>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <Icon name="mdi:github" class="card-icon" />
                     <h2>GitHub</h2>
-                    <p>Explore my projects and contributions</p>
-                    <a href="https://github.com/AmarBego" class="card-link">View Profile</a>
+                    <p data-i18n="githubExplore">{translate('githubExplore', currentLang)}</p>
+                    <a href="https://github.com/AmarBego" class="card-link" data-i18n="viewProfile" target="_blank">
+                        {translate('viewProfile', currentLang)}
+                    </a>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
                     <Icon name="mdi:email" class="card-icon" />
                     <h2>Email</h2>
-                    <p>Send a message directly to me</p>
-                    <a href="mailto:begovicamar@proton.me" class="card-link">Send Email</a>
+                    <p data-i18n="emailMessage">{translate('emailMessage', currentLang)}</p>
+                    <a href="mailto:begovicamar@proton.me" class="card-link" data-i18n="sendEmail" target="_blank">
+                        {translate('sendEmail', currentLang)}
+                    </a>
                 </div>
             </div>
         </div>
     </main>
 </Layout>
+
+<script>
+    import { setupClientTranslation } from '../utils/translation.js';
+    setupClientTranslation();
+</script>

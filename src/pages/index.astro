@@ -3,43 +3,53 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import profileImage from '../images/ME.png';
 import '../styles/glitch.css';
+import { translate, getLanguage } from '../utils/translation.js';
+
+const currentLang = getLanguage();
 ---
 
 <Layout title="Amar Begovic - Web Developer">
     <main>
         <div class="container">
+            <div class="language-switcher">
+                <button id="lang-en" class={currentLang === 'en' ? 'active' : ''}>EN</button>
+                <button id="lang-de" class={currentLang === 'de' ? 'active' : ''}>DE</button>
+            </div>
             <div class="image-container">
                 <Image src={profileImage} alt="Amar Begovic" class="profile-image" />
                 <div class="image-overlay"></div>
             </div>
             <div class="content">
                 <h1 class="glitch" data-text="Amar Begovic">Amar Begovic</h1>
-                <p class="subheadline">Web Developer & Designer</p>
-                <p class="intro">Hey there! I'm a web developer with a passion for creating stunning digital experiences.</p>
+                <p class="subheadline" data-i18n="webDeveloperDesigner">{translate('webDeveloperDesigner', currentLang)}</p>
+                <p class="intro" data-i18n="introGreeting">{translate('introGreeting', currentLang)}</p>
                 <div class="skills">
-                    <span class="skill">HTML</span>
-                    <span class="skill">CSS</span>
-                    <span class="skill">JavaScript</span>
-                    <span class="skill">React</span>
-                    <span class="skill">Astro</span>
-                    <span class="skill">Node.js</span>
+                    <span class="skill" data-i18n="skills.html">{translate('skills.html', currentLang)}</span>
+                    <span class="skill" data-i18n="skills.css">{translate('skills.css', currentLang)}</span>
+                    <span class="skill" data-i18n="skills.javascript">{translate('skills.javascript', currentLang)}</span>
+                    <span class="skill" data-i18n="skills.react">{translate('skills.react', currentLang)}</span>
+                    <span class="skill" data-i18n="skills.astro">{translate('skills.astro', currentLang)}</span>
+                    <span class="skill" data-i18n="skills.nodejs">{translate('skills.nodejs', currentLang)}</span>
                 </div>
-                <p class="description">
-                    I specialize in building fast, responsive websites and web applications using modern technologies. 
-                    My goal is to create beautiful, user-friendly interfaces that help businesses and individuals achieve their goals.
+                <p class="description" data-i18n="description">
+                    {translate('description', currentLang)}
                 </p>
-                <p class="personal">
-                    When I'm not coding, you can find me exploring New York City, trying new restaurants, or playing guitar in my band. 
-                    I'm always looking for new projects and collaborations, so feel free to get in touch if you'd like to work together!
+                <p class="personal" data-i18n="personal">
+                    {translate('personal', currentLang)}
                 </p>
                 <div class="cta-container">
-                    <a href="/projects" class="cta-button">View Projects</a>
-                    <a href="/contact" class="cta-button">Let's Connect</a>
+                    <a href="/projects" class="cta-button" data-i18n="viewProjects">{translate('viewProjects', currentLang)}</a>
+                    <a href="/contact" class="cta-button" data-i18n="letsConnect">{translate('letsConnect', currentLang)}</a>
                 </div>
             </div>
         </div>
     </main>
 </Layout>
+
+<script>
+    import { setupClientTranslation } from '../utils/translation.js';
+    setupClientTranslation();
+</script>
 
 <style>
     main {
@@ -101,6 +111,7 @@ import '../styles/glitch.css';
         flex: 1;
         padding: 2rem;
         color: var(--paragraph);
+        padding-top: 0%;
     }
     .subheadline {
         font-size: 1.5rem;
@@ -162,5 +173,31 @@ import '../styles/glitch.css';
         .cta-container {
             justify-content: center;
         }
+    }
+
+    .language-switcher {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+        display: flex;
+        gap: 5px;
+    }
+    .language-switcher button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--button);
+        color: var(--button);
+        padding: 5px 10px;
+        margin-left: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .language-switcher button.active,
+    .language-switcher button:hover {
+        background: var(--button);
+        color: var(--button-text);
+    }
+    .container {
+        position: relative;
     }
 </style>

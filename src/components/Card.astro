@@ -1,40 +1,26 @@
 ---
+import { Icon } from 'astro-icon/components';
+import { translate, getLanguage } from '../utils/translation.js';
+
 interface Props {
-    title: string;
-    body: string;
+    titleKey: string;
+    bodyKey: string;
     href: string;
+    icon: string;
+    target?: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, titleKey, bodyKey, icon, target } = Astro.props;
+const currentLang = getLanguage();
 ---
 
-<a href={href} class="card">
-    <h2>{title}</h2>
-    <p>{body}</p>
-</a>
-
-<style>
-    .card {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        padding: 1.5rem;
-        color: var(--paragraph);
-        text-decoration: none;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: flex;
-        flex-direction: column;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-        font-size: 1.5rem;
-        color: var(--headline);
-        margin-bottom: 0.5rem;
-    }
-    p {
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-</style>
+<div class="card">
+    <div class="card-content">
+        <Icon name={icon} class="card-icon" />
+        <h2 data-i18n={titleKey}>{translate(titleKey, currentLang)}</h2>
+        <p data-i18n={bodyKey}>{translate(bodyKey, currentLang)}</p>
+    </div>
+    <a href={href} target={target} rel={target === '_blank' ? 'noopener noreferrer' : undefined} class="card-link">
+        <slot name="link-text">View Project</slot>
+    </a>
+</div>
