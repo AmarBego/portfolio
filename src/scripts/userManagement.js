@@ -1,20 +1,33 @@
 import { setupWebSocket, getWebSocket, closeWebSocket } from './websocket.js';
 import { formatDate } from '../utils/dateUtils.js';
 
+const API_KEY = import.meta.env.PUBLIC_API_KEY;
 let users = [];
 let currentPage = 1;
-
 const usersPerPage = 10;
 
+async function authenticatedFetch(url, options = {}) {
+    const defaultOptions = {
+        headers: {
+            'x-api-key': API_KEY,
+            'Content-Type': 'application/json',
+        },
+    };
+    const mergedOptions = { ...defaultOptions, ...options };
+    mergedOptions.headers = { ...defaultOptions.headers, ...options.headers };
+    
+    const response = await fetch(url, mergedOptions);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+}
 async function fetchTransactions(userId) {
     try {
-        const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/users/${userId}/transactions`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+        const data = await authenticatedFetch(`${import.meta.env.PUBLIC_API_URL}/api/users/${userId}/transactions`);
         return data;
     } catch (error) {
+        console.error('Error fetching transactions:', error);
         return [];
     }
 }
@@ -46,9 +59,7 @@ function handleFilters() {
             if (matchesSearch) {
                 row.style.display = '';
                 row.dataset.userId = user._id;
-
                 row.querySelector('td:nth-child(1)').textContent = user.username;
-
                 const lastActiveCell = row.querySelector('td:nth-child(2)');
                 lastActiveCell.textContent = user.lastActive 
                     ? formatDate(user.lastActive)
@@ -171,17 +182,13 @@ function removeTransactionFromModal(transactionId) {
     
     const transactionsList = document.getElementById('transactions-list');
     if (transactionsList.children.length === 0) {
-        transactionsList.innerHTML = '<p>No transactions found.</p>';
+        transactionsList.innerHTML = '<p class="no-transactions">No transactions found.</p>';
     }
 }
 
 async function updateUserTransactionInfo(userId) {
     try {
-        const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/users/${userId}/transactions`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const transactions = await response.json();
+        const transactions = await authenticatedFetch(`${import.meta.env.PUBLIC_API_URL}/api/users/${userId}/transactions`);
         
         const userRow = document.querySelector(`#users-body tr[data-user-id="${userId}"]`);
         if (userRow) {
@@ -211,14 +218,15 @@ export function setupEventListeners() {
     const modal = document.getElementById('transactions-modal');
     const closeModalButton = document.getElementById('close-modal');
     
-    // Close modal on page load/refresh
     closeModal();
 
-    fetch(`${import.meta.env.PUBLIC_API_URL}/api/users`)
-        .then(response => response.json())
+    authenticatedFetch(`${import.meta.env.PUBLIC_API_URL}/api/users`)
         .then(data => {
             users = data;
             handleFilters();
+        })
+        .catch(error => {
+            console.error('Error fetching users:', error);
         });
 
     searchInput.addEventListener('input', () => {
@@ -284,6 +292,5 @@ export function setupEventListeners() {
 document.addEventListener('DOMContentLoaded', () => {
     closeModal();
 });
-
 
 export { handleRealtimeUpdate };

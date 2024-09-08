@@ -20,8 +20,25 @@ interface User {
 
 const currentLang = getLanguage();
 
-const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/users`);
-const users: User[] = await response.json();
+let users: User[] = [];
+let error: string | null = null;
+
+try {
+    const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/users`, {
+        headers: {
+            'x-api-key': import.meta.env.PUBLIC_API_KEY,
+            'Content-Type': 'application/json'
+        }
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    users = Array.isArray(data) ? data : [];
+} catch (e) {
+    console.error("Failed to fetch users:", e);
+    error = e instanceof Error ? e.message : 'An unknown error occurred';
+}
 ---
 
 <Layout title="Users | Amar Begovic">

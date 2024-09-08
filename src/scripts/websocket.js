@@ -1,8 +1,9 @@
 let ws;
 let pingInterval;
+const API_KEY = import.meta.env.PUBLIC_API_KEY;
 
 function setupWebSocket(handleRealtimeUpdate) {
-    const wsUrl = import.meta.env.PUBLIC_WS_URL;
+    const wsUrl = `${import.meta.env.PUBLIC_WS_URL}?apiKey=${API_KEY}`;
     
     ws = new WebSocket(wsUrl);
     
@@ -21,7 +22,6 @@ function setupWebSocket(handleRealtimeUpdate) {
                 handleRealtimeUpdate(message);
             }
         } catch (error) {
-            console.error('Error parsing WebSocket message:', error);
         }
     };
     
