@@ -15,7 +15,7 @@ export const translations = {
         // PROJECTS PAGE
         projectsIntro: "Innovative solutions crafted with passion and expertise.",
         reactFinanceDashboard: "Finance Dashboard",
-        reactFinanceDashboardDesc: "Built a React-based Personal Finance Dashboard with dynamic charts and real-time budget tracking",
+        reactFinanceDashboardDesc: "Built a React-based Personal Finance Dashboard with dynamic charts and real-time budget tracking (As it's free hosting, it may take a while to load the backend)",
         nodeJsAPI: "Node.js API",
         nodeJsAPIDesc: "Seamlessly integrated real-time API powering live data updates across multiple platforms. Connected to the finance dashboard for dynamic user experiences.",
         vueJsEcommerce: "Vue.js E-commerce",
@@ -71,7 +71,7 @@ export const translations = {
         // PROJECTS PAGE
         projectsIntro: "Innovative Lösungen, mit Leidenschaft und Expertise entwickelt.",
         reactFinanceDashboard: "Finanz-Dashboard",
-        reactFinanceDashboardDesc: "Erstellung eines auf React basierenden Personal Finance Dashboards mit dynamischen Diagrammen und Echtzeit-Budgetverfolgung",
+        reactFinanceDashboardDesc: "Erstellung eines auf React basierenden Personal Finance Dashboards mit dynamischen Diagrammen und Echtzeit-Budgetverfolgung (Bitte beachten Sie, dass es aufgrund des kostenlosen Hostings einige Zeit dauern kann, bis das Backend geladen ist)",
         nodeJsAPI: "API",
         nodeJsAPIDesc: "Nahtlos integrierte Echtzeit-API für Live-Datenaktualisierungen auf mehreren Plattformen. Verbunden mit dem Finanz-Dashboard für dynamische Benutzererfahrungen.",
         vueJsEcommerce: "E-Commerce",
