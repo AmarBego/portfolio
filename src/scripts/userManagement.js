@@ -22,8 +22,18 @@ async function authenticatedFetch(url, options = {}) {
     }
     return response.json();
 }
+
+function simulateDelay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function fetchTransactions(userId) {
     try {
+        if (import.meta.env.PUBLIC_SIMULATE_BACKEND_DELAY === 'true') {
+            const delay = Math.floor(Math.random() * 2000) + 1000;
+            await simulateDelay(delay);
+        }
+
         const data = await authenticatedFetch(`${import.meta.env.PUBLIC_API_URL}/api/users/${userId}/transactions`);
         return data;
     } catch (error) {
@@ -31,6 +41,7 @@ async function fetchTransactions(userId) {
         return [];
     }
 }
+
 
 export function filterUsers(searchTerm) {
     return users.filter(user => {
@@ -261,14 +272,24 @@ export function setupEventListeners() {
             const username = row.querySelector('td:first-child').textContent;
             const userId = row.dataset.userId;
             
-            const transactions = await fetchTransactions(userId);
+            const loadingPopup = document.getElementById('loading-popup');
+            loadingPopup.style.display = 'flex';  // Changed from 'block' to 'flex'
             
-            if (target.classList.contains('view-expenses')) {
-                const expenses = transactions.filter(t => t.type === 'expense' && (t.isPaid === true || t.isPaid === null));
-                showModal(`Expenses for ${username}`, expenses, userId, false);
-            } else {
-                const dueTransactions = transactions.filter(t => t.type === 'expense' && t.isPaid === false);
-                showModal(`Due Transactions for ${username}`, dueTransactions, userId, true);
+            try {
+                const transactions = await fetchTransactions(userId);
+                
+                if (target.classList.contains('view-expenses')) {
+                    const expenses = transactions.filter(t => t.type === 'expense' && (t.isPaid === true || t.isPaid === null));
+                    showModal(`Expenses for ${username}`, expenses, userId, false);
+                } else {
+                    const dueTransactions = transactions.filter(t => t.type === 'expense' && t.isPaid === false);
+                    showModal(`Due Transactions for ${username}`, dueTransactions, userId, true);
+                }
+            } catch (error) {
+                console.error('Error loading transactions:', error);
+                alert('Failed to load transactions. Please try again later.');
+            } finally {
+                loadingPopup.style.display = 'none';
             }
         }
     });

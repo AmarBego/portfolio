@@ -99,6 +99,12 @@ try {
             <button id="next-page" disabled>Next <Icon name="mdi:chevron-right" /></button>
         </div>
         <TransactionModal />
+        <div id="loading-popup" class="loading-popup">
+            <div class="loading-content">
+                <p>Backend is loading. Please wait...</p>
+                <div class="spinner"></div>
+            </div>
+        </div>
     </main>
 </Layout>
 
@@ -257,5 +263,16 @@ select {
     .explanation a:hover {
         color: var(--button);
     }
-
+    .loading-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 1000;
+    }
 </style>
