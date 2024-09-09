@@ -40,7 +40,6 @@ try {
     error = e instanceof Error ? e.message : 'An unknown error occurred';
 }
 ---
-
 <Layout title="Users | Amar Begovic">
     <main class="main">
         <h1 class="glitch" data-text="Users">Users</h1>
@@ -53,6 +52,18 @@ try {
             project to be dynamically displayed on another. It's a live example of how my front-end portfolio and back-end API 
             work together to provide an up-to-date, dynamic user experience across different platforms.
         </p>
+
+        <div class="github-link">
+            <a href="https://github.com/AmarBego/API" target="_blank" rel="noopener noreferrer" class="github-button">
+                <Icon name="mdi:github" />
+                View API Repository
+            </a>
+            <p class="github-note">
+                Note: Due to Render's hosting limitations, real-time WebSocket updates may not be available. 
+                However, you can explore the full API implementation in the 
+                <a href="https://github.com/AmarBego/API" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+            </p>
+        </div>
 
         <div class="controls">
             <div class="search-container">
@@ -254,14 +265,19 @@ select {
         line-height: 1.6;
     }
 
-    .explanation a {
-        color: var(--highlight);
-        text-decoration: none;
-        transition: color 0.3s ease;
+    .github-link {
+        max-width: 800px;
+        margin: 1rem auto 2rem;
+        text-align: center;
+        color: var(--paragraph);
+        line-height: 1.6;
     }
-
-    .explanation a:hover {
-        color: var(--button);
+    .github-info {
+        max-width: 800px;
+        margin: 1rem auto 2rem;
+        text-align: center;
+        color: var(--paragraph);
+        line-height: 1.6;
     }
     .loading-popup {
         display: none;
