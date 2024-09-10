@@ -28,13 +28,21 @@ const currentLang = getLanguage();
             </Card>
             <Card 
                 href="/users" 
-                target="_blank"
                 titleKey="nodeJsAPI"
                 bodyKey="nodeJsAPIDesc"
                 icon="nodedotjs"
             >
                 <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
             </Card>
+            <Card 
+            href="https://github.com/AmarBego/TypeScript-Data-Normalization-Library" 
+            target="_blank"
+            titleKey="tsDataTransformer"
+            bodyKey="tsDataTransformerDesc"
+            icon="typescript"
+        >
+            <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
+        </Card>
             <Card 
                 href="https://github.com/AmarBego/ecommerce" 
                 target="_blank"
@@ -53,7 +61,6 @@ const currentLang = getLanguage();
             >
                 <span slot="link-text" data-i18n="viewProject">{translate('viewProject', currentLang)}</span>
             </Card>
-
         </div>
     </main>
 </Layout>

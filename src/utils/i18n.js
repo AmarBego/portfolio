@@ -22,6 +22,8 @@ export const translations = {
         vueJsEcommerceDesc: "Modern e-commerce platform with Vuex state management.",
         astroPortfolio: "Astro Website",
         astroPortfolioDesc: "A responsive, multi-language portfolio website built with Astro, showcasing my projects and skills.",
+        tsDataTransformer: "TS Data Transformer",
+        tsDataTransformerDesc: "A TypeScript library for data normalization, denormalization, and validation with custom schema support and sensitive data redaction.",
         viewProject: "View Project",
 
         // USERS PAGE
@@ -72,12 +74,14 @@ export const translations = {
         projectsIntro: "Innovative Lösungen, mit Leidenschaft und Expertise entwickelt.",
         reactFinanceDashboard: "Finanz-Dashboard",
         reactFinanceDashboardDesc: "Erstellung eines auf React basierenden Personal Finance Dashboards mit dynamischen Diagrammen und Echtzeit-Budgetverfolgung (Bitte beachten Sie, dass es aufgrund des kostenlosen Hostings einige Zeit dauern kann, bis das Backend geladen ist)",
-        nodeJsAPI: "API",
+        nodeJsAPI: "Node.js API",
         nodeJsAPIDesc: "Nahtlos integrierte Echtzeit-API für Live-Datenaktualisierungen auf mehreren Plattformen. Verbunden mit dem Finanz-Dashboard für dynamische Benutzererfahrungen.",
-        vueJsEcommerce: "E-Commerce",
+        vueJsEcommerce: "Vue.js-Commerce",
         vueJsEcommerceDesc: "Moderne E-Commerce-Plattform mit Vuex-Zustandsverwaltung.",
         astroPortfolio: "Astro Webseite",
         astroPortfolioDesc: "Eine responsive, mehrsprachige Portfolio-Webseite, erstellt mit Astro, die meine Projekte und Fähigkeiten präsentiert.",
+        tsDataTransformer: "TS Datentransformator",
+        tsDataTransformerDesc: "Eine TypeScript-Bibliothek für Datennormalisierung, Denormalisierung und Validierung mit Unterstützung für benutzerdefinierte Schemata und Redaktion sensibler Daten.",
         viewProject: "Projekt ansehen",
 
         // USERS PAGE
