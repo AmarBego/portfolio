@@ -43,17 +43,18 @@ export const translations = {
 
         // HOME PAGE
         webDeveloperDesigner: "Web Developer & Designer",
-        introGreeting: "Hey there! I'm a web developer with a passion for creating stunning digital experiences.",
+        introGreeting: "Hello! I'm a full-stack developer with a strong focus on building robust, scalable applications and innovative technical solutions.",
         skills: {
             html: "HTML",
             css: "CSS",
             javascript: "JavaScript",
             react: "React",
             astro: "Astro",
-            nodejs: "Node.js"
+            nodejs: "Node.js",
+            vue: "Vue",
+            typescript: "TypeScript"
         },
-        description: "I specialize in building fast, responsive websites and web applications using modern technologies. My goal is to create beautiful, user-friendly interfaces that help businesses and individuals achieve their goals.",
-        personal: "When I'm not coding, you can find me exploring New York City, trying new restaurants, or playing guitar in my band. I'm always looking for new projects and collaborations, so feel free to get in touch if you'd like to work together!",
+        description: "I'm a passionate application developer with growing expertise in front-end and full-stack development, particularly in creating seamless user experiences and responsive interfaces. Among my recent projects are a TypeScript library for data normalization and a React-based personal finance dashboard with real-time data integration. With my passion for continuous learning and innovation, I strive to develop high-quality software solutions that are both functional and user-friendly.",
         viewProjects: "View Projects",
         letsConnect: "Let's Connect"
     },
@@ -101,17 +102,18 @@ export const translations = {
 
         // HOME PAGE
         webDeveloperDesigner: "Webentwickler & Designer",
-        introGreeting: "Hallo! Ich bin ein Webentwickler mit einer Leidenschaft für die Erstellung atemberaubender digitaler Erlebnisse.",
+        introGreeting: "Hallo! Ich bin ein Full-Stack-Entwickler mit einem starken Fokus auf die Erstellung robuster, skalierbarer Anwendungen und innovativer technischer Lösungen.",
         skills: {
             html: "HTML",
             css: "CSS",
             javascript: "JavaScript",
             react: "React",
             astro: "Astro",
-            nodejs: "Node.js"
+            nodejs: "Node.js",
+            vue: "Vue",
+            typescript: "TypeScript"
         },
-        description: "Ich bin spezialisiert auf den Aufbau schneller, responsiver Websites und Webanwendungen mit modernen Technologien. Mein Ziel ist es, schöne, benutzerfreundliche Schnittstellen zu erstellen, die Unternehmen und Einzelpersonen dabei helfen, ihre Ziele zu erreichen.",
-        personal: "Wenn ich nicht gerade programmiere, findet man mich beim Erkunden von New York City, beim Ausprobieren neuer Restaurants oder beim Gitarrespielen in meiner Band. Ich bin immer auf der Suche nach neuen Projekten und Kooperationen, also melden Sie sich gerne, wenn Sie zusammenarbeiten möchten!",
+        description: "Ich bin ein leidenschaftlicher Anwendungsentwickler mit wachsender Expertise im Front-End- und Full-Stack-Development, insbesondere in der Schaffung nahtloser Benutzererlebnisse und reaktionsschneller Oberflächen. Zu meinen jüngsten Projekten gehört eine TypeScript-Bibliothek zur Datennormalisierung und ein auf React basierendes persönliches Finanz-Dashboard mit Echtzeit-Datenintegration. Mit meiner Leidenschaft für kontinuierliches Lernen und Innovation bin ich bestrebt, qualitativ hochwertige Softwarelösungen zu entwickeln, die sowohl funktional als auch benutzerfreundlich sind.",
         viewProjects: "Projekte ansehen",
         letsConnect: "Kontaktieren Sie mich"
     }
