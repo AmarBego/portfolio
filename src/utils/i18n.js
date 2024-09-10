@@ -20,8 +20,8 @@ export const translations = {
         nodeJsAPIDesc: "Seamlessly integrated real-time API powering live data updates across multiple platforms. Connected to the finance dashboard for dynamic user experiences.",
         vueJsEcommerce: "Vue.js E-commerce",
         vueJsEcommerceDesc: "Modern e-commerce platform with Vuex state management.",
-        typescriptLibrary: "TypeScript Library",
-        typescriptLibraryDesc: "Utility library for data manipulation and validation.",
+        astroPortfolio: "Astro Website",
+        astroPortfolioDesc: "A responsive, multi-language portfolio website built with Astro, showcasing my projects and skills.",
         viewProject: "View Project",
 
         // USERS PAGE
@@ -76,8 +76,8 @@ export const translations = {
         nodeJsAPIDesc: "Nahtlos integrierte Echtzeit-API für Live-Datenaktualisierungen auf mehreren Plattformen. Verbunden mit dem Finanz-Dashboard für dynamische Benutzererfahrungen.",
         vueJsEcommerce: "E-Commerce",
         vueJsEcommerceDesc: "Moderne E-Commerce-Plattform mit Vuex-Zustandsverwaltung.",
-        typescriptLibrary: "Bibliothek",
-        typescriptLibraryDesc: "Utility-Bibliothek für Datenmanipulation und -validierung.",
+        astroPortfolio: "Astro Webseite",
+        astroPortfolioDesc: "Eine responsive, mehrsprachige Portfolio-Webseite, erstellt mit Astro, die meine Projekte und Fähigkeiten präsentiert.",
         viewProject: "Projekt ansehen",
 
         // USERS PAGE

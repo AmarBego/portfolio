@@ -36,7 +36,6 @@ try {
     const data = await response.json();
     users = Array.isArray(data) ? data : [];
 } catch (e) {
-    console.error("Failed to fetch users:", e);
     error = e instanceof Error ? e.message : 'An unknown error occurred';
 }
 ---
@@ -55,7 +54,7 @@ try {
 
         <div class="github-link">
             <a href="https://github.com/AmarBego/API" target="_blank" rel="noopener noreferrer" class="github-button">
-                <Icon name="mdi:github" />
+                <Icon name="simple-icons:github" />
                 View API Repository
             </a>
             <p class="github-note">
