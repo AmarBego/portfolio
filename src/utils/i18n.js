@@ -42,7 +42,7 @@ export const translations = {
         pageInfo: "Page {current} of {total}",
 
         // HOME PAGE
-        webDeveloperDesigner: "Web Developer & Designer",
+        webDeveloperDesigner: "Full-Stack Developer",
         introGreeting: "Hello! I'm a full-stack developer with a strong focus on building robust, scalable applications and innovative technical solutions.",
         skills: {
             html: "HTML",
@@ -101,7 +101,7 @@ export const translations = {
         pageInfo: "Seite {current} von {total}",
 
         // HOME PAGE
-        webDeveloperDesigner: "Webentwickler & Designer",
+        webDeveloperDesigner: "Full-Stack-Entwickler",
         introGreeting: "Hallo! Ich bin ein Full-Stack-Entwickler mit einem starken Fokus auf die Erstellung robuster, skalierbarer Anwendungen und innovativer technischer Lösungen.",
         skills: {
             html: "HTML",
