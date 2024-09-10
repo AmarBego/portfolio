@@ -5,6 +5,7 @@ export default defineConfig({
   integrations: [icon({
     include: {
       'simple-icons': ["*"],
+      'mdi': ["*"],
     },
   })],
 });
